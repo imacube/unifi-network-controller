@@ -1,0 +1,15 @@
+[Unit]
+Description=Unifi Network Controller
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+TimeoutStartSec=240
+RemainAfterExit=yes
+Restart=no
+ExecStart=/usr/bin/docker start unifi-network-controller
+ExecStop=/usr/bin/docker stop unifi-network-controller --time 30
+
+[Install]
+WantedBy=multi-user.target
