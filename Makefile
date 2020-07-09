@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := start
+.DEFAULT_GOAL := ls
 
 .PHONY := build start rm rmi shell volume create ls
 
