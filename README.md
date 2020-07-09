@@ -31,7 +31,7 @@ The build process is handled by the `Makefile`.
 
    ```shell
    make volume
-  ```
+   ```
 
 2. Build the image.
 
@@ -39,19 +39,25 @@ The build process is handled by the `Makefile`.
    make build
    ```
 
-3. Run `make shell` if you want to startup the container and verify the contents.
+3. Tag the image.
+
+   ```shell
+   docker tag unifi-network-controller:latest unifi-network-controller:<software version>
+   ```
+
+4. Run `make shell` if you want to startup the container and verify the contents.
 
    _Note:_ this starts MongoDB and the UniFi Network Controller with the docker volumes attached.
 
    This can be a useful tool to verify the volumes are correctly configured and the filesystem permissions are correct.
 
-4. Create the Docker container.
+5. Create the Docker container.
 
    ```shell
    make create
    ```
 
-5. If desired you can start the container.
+6. If desired you can start the container.
 
    _Note:_ this starts MongoDB and the UniFi Network Controller.
 
@@ -62,7 +68,7 @@ The build process is handled by the `Makefile`.
    make stop
    ```
 
-6. Install the Systemd unit.
+7. Install the Systemd unit.
 
    ```shell
    sudo cp unifi-network-controller.service /etc/systemd/system/unifi-network-controller.service
@@ -70,13 +76,13 @@ The build process is handled by the `Makefile`.
    sudo systemctl enable unifi-network-controller.service
    ```
 
-7. Start the service.
+8. Start the service.
 
    ```shell
    sudo systemctl start unifi-network-controller.service
    ```
 
-8. Verify it's running.
+9. Verify it's running.
 
   ```shell
   docker ps
@@ -87,28 +93,29 @@ The build process is handled by the `Makefile`.
 If you are using ZFS it is highly recommended that a snapshot be taken of the filesystem containing the persistent
 volumes used by the docker container.
 
-1. Build the new image.
-
-   ```shell
-   make build
-   ```
-
-2. Stop the current service.
+1. Stop the current service.
 
    ```shell
    sudo systemctl stop unifi-network-controller.service
    ```
 
-3. Remove the old image.
+2. Build the new image.
 
    ```shell
-   make rm
+   make build
+   ```
+
+3. Tag the image.
+
+   ```shell
+   docker tag unifi-network-controller:latest unifi-network-controller:<software version>
    ```
 
 4. Create the new container.
 
    ```shell
-   make container
+   make create
+   make ls
    ```
 
 5. Update the Systemd unit (may not be necessary).
