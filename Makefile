@@ -19,7 +19,7 @@ volume:
 	mkdir -p $(VOLUME)/$(LOG)/mongodb  # /var/log/mongodb
 
 build:
-	docker build --tag $(NAME) .
+	docker build --no-cache=true --tag $(NAME) .
 
 ls:
 	docker container ls --filter 'name=$(NAME)' -a
