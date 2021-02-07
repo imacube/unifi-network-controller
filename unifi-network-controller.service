@@ -1,11 +1,12 @@
 [Unit]
 Description=Unifi Network Controller
-After=docker.service
+After=local-fs.target
 Requires=docker.service
 
 [Service]
 Type=oneshot
 TimeoutStartSec=240
+TimeoutStopSec=45
 RemainAfterExit=yes
 Restart=no
 ExecStart=/usr/bin/docker start unifi-network-controller
