@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := ls
 
-.PHONY := build start rm rmi shell volume create ls
+.PHONY := build start rm rmi shell volume create ls container-rm
 
 NAME := unifi-network-controller
 
@@ -24,7 +24,10 @@ build:
 ls:
 	docker container ls --filter 'name=$(NAME)' -a
 
-create:
+container-rm:
+	-docker container rm $(NAME)
+
+create: container-rm
 	docker create --name $(NAME) --init --volume $(UNIFI_LIB) --volume $(UNIFI_LOG) --volume $(MONGO_LIB) --volume $(MONGO_LOG) --privileged --network=host -e TZ='America/Pacific' $(NAME):latest
 
 shell:
