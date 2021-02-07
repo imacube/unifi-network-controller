@@ -114,6 +114,7 @@ volumes used by the docker container.
 4. Create the new container.
 
    ```shell
+   sudo systemctl stop unifi-network-controller
    make create
    make ls
    ```
